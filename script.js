@@ -182,6 +182,7 @@ document.getElementById("copy_btn").addEventListener("click", async () => {
 });
 */
 
+// fallback
 function fallbackCopy(text) {
     const textarea = document.createElement("textarea");
     textarea.value = text;
@@ -210,7 +211,7 @@ document.getElementById("copy_btn").addEventListener("click", async () => {
         //alert("已複製！");
         toastr.success( "已複製！" );
     } catch {
-        fallbackCopy(currentChatText); // ⭐ fallback
+        fallbackCopy(currentChatText); // fallback
     }
 
     closeMenu();
