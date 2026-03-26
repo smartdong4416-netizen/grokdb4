@@ -145,6 +145,7 @@ function openDetailPanel(id, data) { // 提供頁面格式 載入資料進來
                 msg.classList.toggle("expanded");
             });
 
+
             // 右鍵事件
             msg.addEventListener("contextmenu", (e) => {
                 //e.stopPropagation();
@@ -563,7 +564,7 @@ document.getElementById("close_big_text").addEventListener("click", () => {
     document.getElementById("big_input_box").classList.remove("open"); 
 });
 
-//清空大型輸入框內容
+// 清空大型輸入框內容
 document.getElementById("clear_big_text").addEventListener("click", () => {
     document.getElementById("big_textarea").value = ""; 
 });
