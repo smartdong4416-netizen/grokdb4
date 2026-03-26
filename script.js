@@ -89,9 +89,11 @@ let unsubscribeChat = null;
 let currentChatRef = null;
 let currentChatText = "";
 
+
 function openDetailPanel(id, data) { // 提供頁面格式 載入資料進來
 
     document.getElementById("chat_input").value = "";
+    document.getElementById("big_textarea").value = ""; // 大型輸入框也清空重置
 
     const overlay = document.getElementById("overlay");
     overlay.classList.add("open");
@@ -214,6 +216,22 @@ document.getElementById("copy_btn").addEventListener("click", async () => {
         fallbackCopy(currentChatText); // fallback
     }
 
+    closeMenu();
+});
+
+// 導入聊天到大型輸入框
+document.getElementById("import_btn").addEventListener("click", () => {
+    if (!currentChatText) return;
+
+    const bigTextarea = document.getElementById("big_textarea");
+
+    // 塞內容
+    bigTextarea.value = currentChatText;
+
+    // 打開大型輸入框
+    document.getElementById("big_input_box").classList.add("open");
+
+    // 關閉右鍵選單
     closeMenu();
 });
 
@@ -523,7 +541,7 @@ toastr.options = {
 const bigBox = document.getElementById("big_input_box");
 
 document.getElementById("toggle_big_input").addEventListener("click", () => {
-    bigBox.classList.toggle("open");
+    bigBox.classList.toggle("open"); // 切換 (如果已經open 就把open移掉)
 });
 
 // 把大型輸入框的內容傳給聊天
