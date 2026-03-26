@@ -274,6 +274,8 @@ document.getElementById("send_chat_btn").addEventListener("click", async () => {
         input.value = "";
         input.style.height = "auto";   // 這樣送出訊息後高度才會調回來
 
+        document.getElementById("big_textarea").value = ""; //清空大型輸入框內容
+
     } catch (error) {
         console.error("聊天新增失敗:", error);
     }
@@ -437,7 +439,7 @@ let isOutsideMouseDown = false;
 // 按下
 overlay.addEventListener("mousedown", (e) => {
   // 如果按在 panel 外
-  if (!e.target.closest("#detail_panel")) {
+  if (!e.target.closest("#detail_panel") && !e.target.closest("#big_input_box")) {
     isOutsideMouseDown = true;
   } else {
     isOutsideMouseDown = false;
@@ -458,6 +460,7 @@ overlay.addEventListener("mouseup", (e) => {
 function closePanel() {
     document.getElementById("overlay").classList.remove("open");
     document.getElementById("detail_panel").classList.remove("open");
+    document.getElementById("big_input_box").classList.remove("open"); // 隱藏大型輸入框
 
     if (unsubscribeChat) {
         unsubscribeChat();
@@ -511,4 +514,37 @@ toastr.options = {
   	}
 //toastr.success( "Success" );
 //toastr.warning( "Warning" );
-//toastr.error( "Error" );
+//toastr.error( "Error" ); 
+
+
+
+// 顯示大型輸入框
+const bigBox = document.getElementById("big_input_box");
+
+document.getElementById("toggle_big_input").addEventListener("click", () => {
+    bigBox.classList.toggle("open");
+});
+
+// 把大型輸入框的內容傳給聊天
+document.getElementById("apply_big_text").addEventListener("click", () => {
+    const bigText = document.getElementById("big_textarea").value;
+
+    if (!bigText.trim()) return;
+
+    const chatInput = document.getElementById("chat_input");
+
+    chatInput.value = bigText;
+
+    // 觸發自動高度調整
+    chatInput.dispatchEvent(new Event("input"));
+});
+
+// 關閉大型輸入框
+document.getElementById("close_big_text").addEventListener("click", () => {
+    document.getElementById("big_input_box").classList.remove("open"); 
+});
+
+//清空大型輸入框內容
+document.getElementById("clear_big_text").addEventListener("click", () => {
+    document.getElementById("big_textarea").value = ""; 
+});
