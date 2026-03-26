@@ -43,7 +43,7 @@ button {
   position: fixed; /* 固定在右半邊 */
   top: 0;
   right: -800px; /* 預設藏起來 */
-  width: 600px;
+  width: 600px; /* 600px */
   height: 100%;
   background: #fff;
   box-shadow: -5px 0 20px rgba(0,0,0,0.1); /* 陰影 */
@@ -90,12 +90,15 @@ button {
   -webkit-line-clamp: 3;      /* 限制3行 */
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
 
+  padding-bottom: 4px; /* 防止第4行頂部被看到 */
+
+}
 
 .chat-message.expanded {
   -webkit-line-clamp: unset; /* 展開全部 */
 }
+
 
 .chat-input-area {
   display: flex;
@@ -207,7 +210,7 @@ button {
   position: fixed;
   top: 0;
   right: 600px; /* 剛好貼在 panel 左邊 */
-  width: 600px;
+  width: 600px; /* 600px */
   height: 100%;
   background: #fff;
 

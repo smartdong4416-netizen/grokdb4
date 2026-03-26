@@ -59,7 +59,6 @@ document.getElementById("add_note_btn").addEventListener("click", async () => {
         return;
     }
 
-    
     try {
         await addDoc(collection(db, "notes"), {
             title,
@@ -71,7 +70,6 @@ document.getElementById("add_note_btn").addEventListener("click", async () => {
 
         clearInput()
         toastr.success( "新增成功！" );
-
 
     } catch (error) {
         console.error("新增失敗:", error);
@@ -88,7 +86,6 @@ let unsubscribeChat = null;
 
 let currentChatRef = null;
 let currentChatText = "";
-
 
 function openDetailPanel(id, data) { // 提供頁面格式 載入資料進來
 
@@ -146,7 +143,7 @@ function openDetailPanel(id, data) { // 提供頁面格式 載入資料進來
             });
 
 
-            // 右鍵事件
+            // 右鍵事件 顯示其他功能
             msg.addEventListener("contextmenu", (e) => {
                 //e.stopPropagation();
                 e.preventDefault();    // ⭐ 關掉瀏覽器右鍵選單
@@ -164,7 +161,6 @@ function openDetailPanel(id, data) { // 提供頁面格式 載入資料進來
 
                 menu.style.display = "block";
             });
-
 
             chat_list.appendChild(msg);
         });
@@ -306,17 +302,12 @@ document.getElementById("send_chat_btn").addEventListener("click", async () => {
 
 
 
-
-
-
-
-
-// 關閉
+// 關閉 detail panel 頁面
 document.getElementById("close_btn").addEventListener("click", () => {
     closePanel();
 });
 
-// 儲存修改
+// 儲存修改 並在成功後關閉 detail panel 頁面
 document.getElementById("save_btn").addEventListener("click", async () => {
     const panel = document.getElementById("detail_panel");
     const id = panel.dataset.id;
@@ -367,16 +358,13 @@ onSnapshot(
         snapshot.forEach(docSnap => {
             const data = docSnap.data();
 
-
             const note = document.createElement("div");
             note.classList.add("note");
             note.dataset.id = docSnap.id;
 
-
             const deleteBtn = document.createElement("button"); // 刪除按鈕
             deleteBtn.classList.add("delete-btn");
             deleteBtn.textContent = "✕";
-
 
             // 防止點刪除時觸發卡片點擊
             deleteBtn.addEventListener("click", async (e) => {
@@ -476,7 +464,6 @@ overlay.addEventListener("mouseup", (e) => {
   isOutsideMouseDown = false; // 重置
 });
 
-
 function closePanel() {
     document.getElementById("overlay").classList.remove("open");
     document.getElementById("detail_panel").classList.remove("open");
@@ -494,7 +481,7 @@ const chatInput = document.getElementById("chat_input");
 chatInput.addEventListener("input", () => {
   chatInput.style.height = "auto";
 
-  const maxHeight = 120; // 要跟 CSS 一致
+  const maxHeight = 80; // 要跟 CSS 一致 (現在每行高20 所以第4行以前不會出現滾輪)
   if (chatInput.scrollHeight > maxHeight) {
     chatInput.style.height = maxHeight + "px";
     chatInput.style.overflowY = "auto";   // 出現滾輪
@@ -515,27 +502,26 @@ chatInput.addEventListener("keydown", (e) => {
 
 // toast 設定
 toastr.options = {
-  		// 參數設定
-  		"closeButton": false, // 顯示關閉按鈕
-  		"debug": false, // 除錯
-  		"newestOnTop": false,  // 最新一筆顯示在最上面
-  		"progressBar": true, // 顯示隱藏時間進度條
-  		"positionClass": "toast-top-right", // 位置的類別 bottom left
-  		"preventDuplicates": false, // 隱藏重覆訊息
-  		"onclick": null, // 當點選提示訊息時，則執行此函式
-  		"showDuration": "300", // 顯示時間(單位: 毫秒)
-  		"hideDuration": "1000", // 隱藏時間(單位: 毫秒)
-  		"timeOut": "3000", // 當超過此設定時間時，則隱藏提示訊息(單位: 毫秒)
-  		"extendedTimeOut": "1000", // 當使用者觸碰到提示訊息時，離開後超過此設定時間則隱藏提示訊息(單位: 毫秒)
-  		"showEasing": "swing", // 顯示動畫時間曲線
-  		"hideEasing": "linear", // 隱藏動畫時間曲線
-  		"showMethod": "fadeIn", // 顯示動畫效果
-  		"hideMethod": "fadeOut" // 隱藏動畫效果
-  	}
+  	// 參數設定
+  	"closeButton": false, // 顯示關閉按鈕
+  	"debug": false, // 除錯
+  	"newestOnTop": false,  // 最新一筆顯示在最上面
+  	"progressBar": true, // 顯示隱藏時間進度條
+  	"positionClass": "toast-top-right", // 位置的類別 bottom left
+  	"preventDuplicates": false, // 隱藏重覆訊息
+  	"onclick": null, // 當點選提示訊息時，則執行此函式
+  	"showDuration": "300", // 顯示時間(單位: 毫秒)
+  	"hideDuration": "1000", // 隱藏時間(單位: 毫秒)
+  	"timeOut": "3000", // 當超過此設定時間時，則隱藏提示訊息(單位: 毫秒)
+  	"extendedTimeOut": "1000", // 當使用者觸碰到提示訊息時，離開後超過此設定時間則隱藏提示訊息(單位: 毫秒)
+  	"showEasing": "swing", // 顯示動畫時間曲線
+  	"hideEasing": "linear", // 隱藏動畫時間曲線
+  	"showMethod": "fadeIn", // 顯示動畫效果
+  	"hideMethod": "fadeOut" // 隱藏動畫效果
+}
 //toastr.success( "Success" );
 //toastr.warning( "Warning" );
 //toastr.error( "Error" ); 
-
 
 
 // 顯示大型輸入框
