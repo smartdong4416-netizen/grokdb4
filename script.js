@@ -14,7 +14,7 @@ import {
  
 import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
  
-
+ 
 // Firebase 設定
 const firebaseConfig = {
   apiKey: "AIzaSyAaHF-9RkjwQqaPqWfx2NTKizCeaA1R1I8",

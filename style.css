@@ -12,7 +12,7 @@ input {
   outline: none;
   font-size: 14px;
 }
-
+ 
 button {
   background: #2575fc;
   color: white;
@@ -72,7 +72,7 @@ button {
 }
 
 .chat-message {
-  padding: 8px 12px;
+  padding: 4px 12px; /* 4px 防止第4行頂部被看到 */
   margin: 6px 0;
   background: rgba(128, 128, 128, 0.5);
   color: black;
@@ -91,7 +91,7 @@ button {
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  padding-bottom: 4px; /* 防止第4行頂部被看到 */
+   
 
 }
 
