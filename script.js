@@ -70,10 +70,13 @@ document.getElementById("add_note_btn").addEventListener("click", async () => {
         });
 
         clearInput()
+        toastr.success( "新增成功！" );
+
 
     } catch (error) {
         console.error("新增失敗:", error);
-        alert("新增失敗，請看 console");
+        // alert("新增失敗，請看 console");
+        toastr.error( "新增失敗" );
     }
 
     add_note_btn.disabled = false; // 解鎖
@@ -222,6 +225,7 @@ document.getElementById("delete_chat_btn").addEventListener("click", async () =>
 
     try {
         await deleteDoc(currentChatRef);
+        toastr.success( "刪除成功！" );
     } catch (error) {
         console.error("刪除失敗:", error);
     }
@@ -314,6 +318,7 @@ document.getElementById("save_btn").addEventListener("click", async () => {
 
         panel.classList.remove("open"); // 收回 detail panel
         document.getElementById("overlay").classList.remove("open");
+        toastr.success( "更新成功！" );
 
     } catch (error) {
         console.error("更新失敗:", error);
@@ -376,10 +381,12 @@ onSnapshot(
                     );
 
                     await deleteDoc(doc(db, "notes", docSnap.id)); // 再刪掉整個 note
+                    toastr.success( "刪除成功！" );
                     
                 } catch (error) {
                     console.error("刪除失敗:", error);
-                    alert("刪除失敗");
+                    //alert("刪除失敗");
+                    toastr.error( "刪除失敗" );
                 }
             });
 
